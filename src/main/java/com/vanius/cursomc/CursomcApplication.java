@@ -13,6 +13,7 @@ import com.vanius.cursomc.domain.Cidade;
 import com.vanius.cursomc.domain.Cliente;
 import com.vanius.cursomc.domain.Endereco;
 import com.vanius.cursomc.domain.Estado;
+import com.vanius.cursomc.domain.ItemPedido;
 import com.vanius.cursomc.domain.Pagamento;
 import com.vanius.cursomc.domain.PagamentoComBoleto;
 import com.vanius.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.vanius.cursomc.repositories.CidadeRepository;
 import com.vanius.cursomc.repositories.ClienteRepository;
 import com.vanius.cursomc.repositories.EnderecoRepository;
 import com.vanius.cursomc.repositories.EstadoRepository;
+import com.vanius.cursomc.repositories.ItemPedidoRepository;
 import com.vanius.cursomc.repositories.PagamentoRepository;
 import com.vanius.cursomc.repositories.PedidoRepository;
 import com.vanius.cursomc.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepo;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepo;
 	
 	
 	public static void main(String[] args) {
@@ -126,6 +131,21 @@ public class CursomcApplication implements CommandLineRunner {
 		pedidoRepo.save(Arrays.asList(ped1,ped2));
 		
 		pagamentoRepo.save(Arrays.asList(pagto1,pagto2));
+		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepo.save(Arrays.asList(ip1,ip2,ip3));
+		
 		
 		
 		
