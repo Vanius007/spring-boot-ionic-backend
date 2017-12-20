@@ -15,7 +15,7 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository repo;
 	
-	public Pedido Buscar(Integer id) {
+	public Pedido find(Integer id) {
 		
 		Pedido obj = repo.findOne(id);
 		
