@@ -35,16 +35,18 @@ public class CategoriaService {
 		return obj;
 	}
 	
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	
 	public List<Categoria> findAll(){
 		
 		return repo.findAll();
 		
 	}
 	
-	public Categoria insert(Categoria obj) {
-		obj.setId(null);
-		return repo.save(obj);
-	}
 	
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
