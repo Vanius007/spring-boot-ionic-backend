@@ -2,12 +2,15 @@ package com.vanius.cursomc.dto;
 
 import java.io.Serializable;
 
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.vanius.cursomc.domain.Cliente;
+import com.vanius.cursomc.services.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -11,6 +11,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
+import com.vanius.cursomc.domain.Cliente;
 import com.vanius.cursomc.dto.ClienteDTO;
 import com.vanius.cursomc.repositories.ClienteRepository;
 import com.vanius.cursomc.services.exceptions.FieldMessage;
@@ -32,12 +33,13 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();
 		
+		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		
 		Integer uriId = Integer.parseInt(map.get("id"));
 		
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		if (aux!= null && !aux.) {
+		if (aux!= null && !aux.getId().equals(uriId)) {
 			list.add(new FieldMessage("email", "Email já existente"));
 		}
 		
