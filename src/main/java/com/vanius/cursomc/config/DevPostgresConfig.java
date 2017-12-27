@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.vanius.cursomc.services.DBService;
+import com.vanius.cursomc.services.EmailService;
+import com.vanius.cursomc.services.MockEmailService;
 
 @Configuration
 @Profile("devpostgres")
@@ -20,6 +22,12 @@ public class DevPostgresConfig {
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	
 	private String strategy;
+	
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
+	}
+	
 	
 	@Bean
 	public boolean instantiateDatabase() throws ParseException {
