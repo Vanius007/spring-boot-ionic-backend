@@ -38,6 +38,11 @@ public class UserSS implements UserDetails {
 	public Integer getId() {
 		return id;
 	}	
+	
+	public boolean hasRole(Perfil perfis) {
+		
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfis.getDescricao()));
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

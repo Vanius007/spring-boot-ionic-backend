@@ -13,12 +13,15 @@ import org.springframework.stereotype.Service;
 import com.vanius.cursomc.domain.Cidade;
 import com.vanius.cursomc.domain.Cliente;
 import com.vanius.cursomc.domain.Endereco;
+import com.vanius.cursomc.domain.enums.Perfil;
 import com.vanius.cursomc.domain.enums.TipoCliente;
 import com.vanius.cursomc.dto.ClienteDTO;
 import com.vanius.cursomc.dto.ClienteNewDTO;
 import com.vanius.cursomc.repositories.CidadeRepository;
 import com.vanius.cursomc.repositories.ClienteRepository;
 import com.vanius.cursomc.repositories.EnderecoRepository;
+import com.vanius.cursomc.security.UserSS;
+import com.vanius.cursomc.services.exceptions.AuthorizationException;
 import com.vanius.cursomc.services.exceptions.DataIntegrityException;
 import com.vanius.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -40,6 +43,12 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		
+		if(user == null || !user.hasRole(Perfil.ADMIN) && id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
 		
 		Cliente obj = repo.findOne(id);
 		
