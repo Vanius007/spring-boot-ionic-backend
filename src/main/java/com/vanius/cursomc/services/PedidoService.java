@@ -58,6 +58,7 @@ public class PedidoService {
 		}
 		
 		return obj;
+		
 	}
 	
 	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String direction, String orderBy){
