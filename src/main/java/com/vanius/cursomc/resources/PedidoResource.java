@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.vanius.cursomc.domain.Categoria;
 import com.vanius.cursomc.domain.Pedido;
-import com.vanius.cursomc.dto.CategoriaDTO;
 import com.vanius.cursomc.services.PedidoService;
 
 @RestController
